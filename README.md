@@ -1,6 +1,6 @@
 # circular_widgets
 
-A new Flutter package project.
+Displays widgets in circles
 
 ## Getting Started
 
