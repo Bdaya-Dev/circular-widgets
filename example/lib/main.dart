@@ -14,7 +14,9 @@ class ExampleWidget extends StatefulWidget {
 
 class _ExampleWidgetState extends State<ExampleWidget> {
   int length = 5;
-
+  double innerSpacingDivider = 10;
+  double radiusOfItemDivider = 6;
+  double centerWidgetRadiusDivider = 3;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,61 +24,99 @@ class _ExampleWidgetState extends State<ExampleWidget> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Test Circular Widgets'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                setState(() => length++);
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.remove),
+              onPressed: () {
+                setState(() => length--);
+              },
+            ),
+          ],
         ),
         // Use Layout builder for responsive behaviour
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            var smallestBoundary =
-                min(constraints.maxHeight, constraints.maxWidth);
-            return CircularWidgets(
-              itemsLength: length,
-              itemBuilder: (context, index) {
-                // Can be any widget, preferably a circle
-                return SingleCircle(
-                  txt: index.toString(),
-                  color: Colors.grey,
-                );
-              },
-              innerSpacing: smallestBoundary / 30,
-              radiusOfItem: smallestBoundary / 8,
-              centerWidgetRadius: smallestBoundary / 2,
-              centerWidgetBuilder: (context) {
-                return SingleCircle(
-                  txt: 'Center',
-                  color: Colors.red,
-                );
-              },
-            );
-          },
-        ),
-        floatingActionButton: Align(
-          alignment: Alignment.bottomRight,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FloatingActionButton(
-                  heroTag: null,
-                  child: Icon(Icons.add),
-                  onPressed: () {
-                    setState(() => length++);
-                  },
+        body: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: ListTile(
+                title: Text('Responsive Inner Spacing'),
+                subtitle: Slider(
+                  min: 1,
+                  max: 30,
+                  divisions: 29,
+                  label: innerSpacingDivider.toStringAsFixed(2),
+                  value: innerSpacingDivider,
+                  onChanged: (newVal) =>
+                      setState(() => innerSpacingDivider = newVal),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: FloatingActionButton(
-                  heroTag: null,
-                  child: Icon(Icons.remove),
-                  onPressed: () {
-                    setState(() => length--);
-                  },
+            ),
+            //Wrap with Expanded for Layout Builder to work, since it requires bounded width and height
+            Expanded(
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  var smallestBoundary =
+                      min(constraints.maxHeight, constraints.maxWidth);
+                  return CircularWidgets(
+                    itemsLength: length,
+                    itemBuilder: (context, index) {
+                      // Can be any widget, preferably a circle
+                      return SingleCircle(
+                        txt: index.toString(),
+                        color: Colors.grey,
+                      );
+                    },
+                    innerSpacing: smallestBoundary / innerSpacingDivider,
+                    radiusOfItem: smallestBoundary / radiusOfItemDivider,
+                    centerWidgetRadius:
+                        smallestBoundary / centerWidgetRadiusDivider,
+                    centerWidgetBuilder: (context) {
+                      return SingleCircle(
+                        txt: 'Center',
+                        color: Colors.red,
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: ListTile(
+                title: Text('Responsive Center Radius'),
+                subtitle: Slider(
+                  min: 1,
+                  max: 5,
+                  divisions: 16,
+                  label: centerWidgetRadiusDivider.toStringAsFixed(2),
+                  value: centerWidgetRadiusDivider,
+                  onChanged: (newVal) =>
+                      setState(() => centerWidgetRadiusDivider = newVal),
                 ),
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: ListTile(
+                title: Text('Responsive Item Radius'),
+                subtitle: Slider(
+                  min: 1,
+                  max: 10,
+                  divisions: 18,
+                  label: radiusOfItemDivider.toStringAsFixed(2),
+                  value: radiusOfItemDivider,
+                  onChanged: (newVal) =>
+                      setState(() => radiusOfItemDivider = newVal),
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
