@@ -1,6 +1,6 @@
 name: circular_widgets
 description: Display widgets in a circle.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/Bdaya-Dev/circular-widgets
 repository: https://github.com/Bdaya-Dev/circular-widgets
 
@@ -12,9 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
+dev_dependencies: 
 
 
 flutter:

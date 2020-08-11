@@ -4,7 +4,10 @@ Displays widgets in circles
 
 Example :
 
-<img src="https://i.imgur.com/9OIFvFe.gif" width="250"> 
+<img src="https://i.imgur.com/9JMB1cO.gif" width=500> 
+
+You can control the radius of the center circle, the surrounding items and the inner spacing between them.
+
 
 
 ## Getting Started
