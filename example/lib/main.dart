@@ -27,7 +27,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
         body: LayoutBuilder(
           builder: (context, constraints) {
             var smallestBoundary =
-                min(constraints.maxHeight, constraints.maxHeight);
+                min(constraints.maxHeight, constraints.maxWidth);
             return CircularWidgets(
               itemsLength: length,
               itemBuilder: (context, index) {
@@ -39,7 +39,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
               },
               innerSpacing: smallestBoundary / 30,
               radiusOfItem: smallestBoundary / 8,
-              centerWidgetRadius: smallestBoundary / 4,
+              centerWidgetRadius: smallestBoundary / 2,
               centerWidgetBuilder: (context) {
                 return SingleCircle(
                   txt: 'Center',
@@ -76,19 +76,7 @@ class _ExampleWidgetState extends State<ExampleWidget> {
                 ),
               ),
             ],
-          ), /* Column(
-          
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: 
-            ),
-          ],
-        ),*/
+          ),
         ),
       ),
     );
@@ -106,9 +94,6 @@ class SingleCircle extends StatelessWidget {
       //color: Colors.red,
       child: Center(child: Text(txt)),
       decoration: BoxDecoration(
-        // image: b.imageUrl == null
-        //     ? null
-        //     : DecorationImage(image: NetworkImage(b.imageUrl)),
         shape: BoxShape.circle,
         color: color,
       ),
