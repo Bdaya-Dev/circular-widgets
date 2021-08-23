@@ -1,5 +1,7 @@
 # circular_widgets
 
+[pub.dev](https://pub.dev/packages/circular_widgets)
+
 Displays widgets in circles
 
 Example :
