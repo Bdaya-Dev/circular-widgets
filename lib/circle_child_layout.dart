@@ -8,12 +8,12 @@ typedef double ItemAngleCalculator(int index);
 
 class CircularLayoutDelegate extends MultiChildLayoutDelegate {
   final Map<String, LayoutId> idItems;
-  final LayoutId centerCircleLayoutId;
+  final LayoutId? centerCircleLayoutId;
   final double radius;
 
   CircularLayoutDelegate({
-    @required this.idItems,
-    @required this.radius,
+    required this.idItems,
+    required this.radius,
     this.centerCircleLayoutId,
   });
 
@@ -27,7 +27,7 @@ class CircularLayoutDelegate extends MultiChildLayoutDelegate {
     for (int i = 0; i < idItems.length; i++) {
       final idItem = itemValues[i];
 
-      final String id = idItem.id;
+      final Object id = idItem.id;
 
       final Size buttonSize = layoutChild(id, BoxConstraints.loose(size));
       int actualIndex = i;
@@ -45,13 +45,17 @@ class CircularLayoutDelegate extends MultiChildLayoutDelegate {
         ),
       );
     }
-    if (centerCircleLayoutId != null) {
+
+    final centerLayoutId = centerCircleLayoutId;
+    if (centerLayoutId != null) {
       final Size buttonSize =
-          layoutChild(centerCircleLayoutId.id, BoxConstraints.loose(size));
+          layoutChild(centerLayoutId.id, BoxConstraints.loose(size));
       positionChild(
-        centerCircleLayoutId.id,
-        new Offset(center.dx - (buttonSize.width / 2),
-            center.dy - (buttonSize.height / 2)),
+        centerLayoutId.id,
+        Offset(
+          center.dx - (buttonSize.width / 2),
+          center.dy - (buttonSize.height / 2),
+        ),
       );
     }
   }

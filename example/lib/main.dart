@@ -126,8 +126,11 @@ class _ExampleWidgetState extends State<ExampleWidget> {
 class SingleCircle extends StatelessWidget {
   final String txt;
   final Color color;
-  const SingleCircle({Key key, @required this.txt, @required this.color})
-      : super(key: key);
+  const SingleCircle({
+    Key? key,
+    required this.txt,
+    required this.color,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
