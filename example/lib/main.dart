@@ -17,6 +17,10 @@ class _ExampleWidgetState extends State<ExampleWidget> {
   double innerSpacingDivider = 10;
   double radiusOfItemDivider = 6;
   double centerWidgetRadiusDivider = 3;
+
+  double startAngleDeg = -90;
+  double totalArchDeg = 360;
+  bool isClockwise = true;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -57,6 +61,44 @@ class _ExampleWidgetState extends State<ExampleWidget> {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: ListTile(
+                title: Text('Start angle'),
+                subtitle: Slider(
+                  min: -360,
+                  max: 360,
+                  label: startAngleDeg.toStringAsFixed(2),
+                  value: startAngleDeg,
+                  onChanged: (newVal) => setState(() => startAngleDeg = newVal),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: ListTile(
+                title: Text('Total Arch'),
+                subtitle: Slider(
+                  min: 0,
+                  max: 360,
+                  label: totalArchDeg.toStringAsFixed(2),
+                  value: totalArchDeg,
+                  onChanged: (newVal) => setState(() => totalArchDeg = newVal),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0),
+              child: CheckboxListTile(
+                title: Text('Is Clockwise ?'),
+                value: isClockwise,
+                onChanged: (newVal) {
+                  setState(() {
+                    isClockwise = newVal ?? true;
+                  });
+                },
+              ),
+            ),
             //Wrap with Expanded for Layout Builder to work, since it requires bounded width and height
             Expanded(
               child: LayoutBuilder(
@@ -64,6 +106,9 @@ class _ExampleWidgetState extends State<ExampleWidget> {
                   var smallestBoundary =
                       min(constraints.maxHeight, constraints.maxWidth);
                   return CircularWidgets(
+                    startAngleDeg: startAngleDeg,
+                    totalArchDeg: totalArchDeg,
+                    isClockWise: isClockwise,
                     itemsLength: length,
                     itemBuilder: (context, index) {
                       // Can be any widget, preferably a circle
@@ -107,8 +152,8 @@ class _ExampleWidgetState extends State<ExampleWidget> {
                 title: Text('Responsive Item Radius'),
                 subtitle: Slider(
                   min: 1,
-                  max: 10,
-                  divisions: 18,
+                  max: 20,
+                  // divisions: 18,
                   label: radiusOfItemDivider.toStringAsFixed(2),
                   value: radiusOfItemDivider,
                   onChanged: (newVal) =>

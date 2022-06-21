@@ -21,10 +21,23 @@ class CircularWidgets extends StatelessWidget {
 
   /// Space between inner circle and outer circles
   final double innerSpacing;
+
+  //Where to start drawing the first item (0 refers to the right axis)
+  final double startAngleDeg;
+
+  //The total arch angle (in degrees), 360 by default to fill entire widget
+  final double totalArchDeg;
+
+  //Draw items clockwise
+  final bool isClockWise;
+
   const CircularWidgets({
     Key? key,
     required this.itemBuilder,
     required this.itemsLength,
+    this.isClockWise = true,
+    this.startAngleDeg = -90,
+    this.totalArchDeg = 360,
     this.radiusOfItem = 100,
     this.centerWidgetBuilder,
     this.centerWidgetRadius = 150,
@@ -59,6 +72,9 @@ class CircularWidgets extends StatelessWidget {
 
     return CustomMultiChildLayout(
       delegate: CircularLayoutDelegate(
+        startAngleDeg: startAngleDeg,
+        isClockWise: isClockWise,
+        totalArchDeg: totalArchDeg,
         idItems: itemIds,
         centerCircleLayoutId: circleWidget,
         radius: (centerWidgetRadius + innerSpacing + radiusOfItem) / 2,
