@@ -1,3 +1,11 @@
+## [2.1.0] - 21/6/2022
+
+* Added more customization options
+  * `isClockWise` to change draw direction
+  * `startAngleDeg` to set the start angle (in degrees)
+  * `totalArchDeg` to set the length of the total arch (in degrees)
+* Updated example
+
 ## [2.0.0] - 23/8/2021
 
 * Updated to null safety
