@@ -1,3 +1,11 @@
+## [3.0.0] - 23/6/2022
+
+* Fixed wrong math equations
+* added separate class `CircularWidgetConfig` to hold the config
+* added `isAddExtraFakeItem` fixes [Children division offset #5](https://github.com/Bdaya-Dev/circular-widgets/issues/5)
+* added  `drawOrder` fixes [Allow to choose whether center circle or outer ones first  #3](https://github.com/Bdaya-Dev/circular-widgets/issues/3)
+* upgraded to flutter 3 and sdk 2.14.0
+
 ## [2.1.0] - 21/6/2022
 
 * Added more customization options
