@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 import 'config_widget.dart';
 
 class ExamplePage extends StatefulWidget {
+  const ExamplePage({super.key});
+
   @override
-  _ExamplePageState createState() => _ExamplePageState();
+  ExamplePageState createState() => ExamplePageState();
 }
 
-class _ExamplePageState extends State<ExamplePage> {
+class ExamplePageState extends State<ExamplePage> {
   int length = 5;
-  CircularWidgetConfig config = CircularWidgetConfig(
+  CircularWidgetConfig config = const CircularWidgetConfig(
     innerSpacing: 0,
-    itemRadius: 50,
-    centerWidgetRadius: 100,
+    itemRadius: 20,
+    centerWidgetRadius: 50,
     startAngleDeg: -90,
     totalArchDeg: 360,
     isClockwise: true,
@@ -25,27 +27,11 @@ class _ExamplePageState extends State<ExamplePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Test Circular Widgets'),
+        title: const Text('Test Circular Widgets'),
       ),
       // Use Layout builder for responsive behaviour
-      body: Row(
+      body: Column(
         children: [
-          Expanded(
-            child: ConfigWidget(
-              config: config,
-              valueSetter: (newVal) {
-                setState(() {
-                  config = newVal;
-                });
-              },
-              itemsLength: length,
-              itemsLengthSetter: (newVal) {
-                setState(() {
-                  length = newVal;
-                });
-              },
-            ),
-          ),
           Container(
             decoration: BoxDecoration(
               border: Border.all(color: Colors.black, width: 3),
@@ -61,10 +47,26 @@ class _ExamplePageState extends State<ExamplePage> {
                 );
               },
               centerWidgetBuilder: (context) {
-                return SingleCircle(
+                return const SingleCircle(
                   txt: 'Center',
                   color: Colors.red,
                 );
+              },
+            ),
+          ),
+          Expanded(
+            child: ConfigWidget(
+              config: config,
+              valueSetter: (newVal) {
+                setState(() {
+                  config = newVal;
+                });
+              },
+              itemsLength: length,
+              itemsLengthSetter: (newVal) {
+                setState(() {
+                  length = newVal;
+                });
               },
             ),
           ),
@@ -86,11 +88,11 @@ class SingleCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     // return Placeholder();
     return Container(
-      child: Center(child: Text(txt)),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: color,
       ),
+      child: Center(child: Text(txt)),
     );
   }
 }

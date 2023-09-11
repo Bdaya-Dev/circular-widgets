@@ -4,7 +4,7 @@ import 'example_page.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: ExamplePage(),
     ),
